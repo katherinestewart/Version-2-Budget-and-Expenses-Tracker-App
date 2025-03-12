@@ -4,9 +4,8 @@ week month or year, view budgets, view budget progress; for week month
 or year or return to main menu.
 """
 
-from user_interface.display import clear, budget_menu_heading, budget_sub_heading
-from user_interface.user_input import (get_menu_selection, request_complete,
-                                       finish_viewing)
+from user.interface import clear, budget_menu_heading, budget_sub_heading
+from user.input import get_menu_selection, request_complete, finish_viewing
 
 BUDGET_MENU = f"""{budget_menu_heading("BUDGET")}
 \nPlease select from the following options:

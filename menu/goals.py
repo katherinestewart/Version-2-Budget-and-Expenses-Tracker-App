@@ -5,10 +5,8 @@ budget and cancel; return to main menu. It also contains all relevant
 functions to get the required returns for each selection.
 """
 
-from user_interface.user_input import (finish_viewing, request_complete,
-                                       get_menu_selection)
-from user_interface.display import (clear, goals_menu_heading,
-                                    goals_sub_heading)
+from user.input import finish_viewing, request_complete, get_menu_selection
+from user.interface import clear, goals_menu_heading, goals_sub_heading
 
 GOALS_MENU = f"""{goals_menu_heading("FINANCIAL GOALS")}
 \nPlease choose from the following options:

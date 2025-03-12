@@ -1,8 +1,7 @@
 """This module contains the categories menu."""
 
-from user_interface.display import expenses_sub_heading, clear
-from user_interface.user_input import (get_menu_selection, finish_viewing,
-                                       request_complete)
+from user.interface import expenses_sub_heading, clear
+from user.input import get_menu_selection, finish_viewing, request_complete
 
 CATEGORIES_MENU = f"""{expenses_sub_heading("Manage Categories")}
 \nPlease choose from the following options:
@@ -39,21 +38,18 @@ def categories_menu():
         print(CATEGORIES_MENU)
         menu = get_menu_selection(3)
 
-        # ****** View categories ******
         if menu == 1:
             clear()
             print(expenses_sub_heading("View Categories"))
             view_categories()
             finish_viewing()
 
-        # ****** Edit category ******
         elif menu == 2:
             clear()
             print(expenses_sub_heading("Edit Categories"))
             edit_category()
             request_complete("Category", "updated")
 
-        # ****** Add category ******
         elif menu == 3:
             clear()
             print(expenses_sub_heading("Add Category"))

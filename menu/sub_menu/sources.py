@@ -1,8 +1,7 @@
 """This module"""
 
-from user_interface.display import clear, income_sub_heading
-from user_interface.user_input import (get_menu_selection, finish_viewing,
-                                       request_complete)
+from user.interface import clear, income_sub_heading
+from user.input import get_menu_selection, finish_viewing, request_complete
 
 SOURCES_MENU = f"""{income_sub_heading("Sources")}
 \nPlease choose from the following options:
