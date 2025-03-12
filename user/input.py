@@ -4,6 +4,15 @@ from time import sleep
 
 ENTER = "\nEnter your selection: "
 INVALID_INPUT = "You entered an invalid input. Please try again."
+SELECT_DATE_RANGE = """\n\U0001f5d3  \
+Please choose from the following time periods:\n
+1.  This month
+2.  Past 3 months
+3.  Past 6 months
+4.  Past year
+5.  All history
+0.  Cancel\
+"""
 
 
 def request_complete(thing, done):
@@ -112,3 +121,11 @@ def description_check(description):
         return False
 
     return True
+
+
+def select_date_range():
+    """This function 
+    """
+    print(SELECT_DATE_RANGE)
+    date_range = get_menu_selection(5)
+    return date_range

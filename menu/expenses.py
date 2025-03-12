@@ -4,9 +4,10 @@ categories or return to main menu. It also contains all relevant
 functions to get the required returns for each selection.
 """
 
-from menu.sub_menu.categories import categories_menu
-from managers.expenses_manager import Expense, get_expense
-from user.input import get_menu_selection, request_complete, finish_viewing
+from menu.sub_menu.categories import categories_menu, view_categories
+from managers.expenses_manager import get_new_expense, print_expenses, get_expenses_this_month
+from user.input import (get_menu_selection, request_complete, finish_viewing,
+                        select_date_range)
 from user.interface import (expenses_menu_heading, expenses_sub_heading,
                             clear)
 
@@ -21,19 +22,39 @@ EXPENSES_MENU = f"""{expenses_menu_heading("EXPENSES")}
 
 def add_expense():
     """This function adds an expense to the database."""
-    get_expense().insert_expense()
+    expense = get_new_expense()
+    expense.insert_expense()
+    clear()
+    print_expenses([expense])
 
 
 def view_expenses():
     """This function displays expenses in a specified date range.
     """
-    print("Logic here to select date and print expenses.")
+    date_range = select_date_range()
+    if date_range == 0:
+        pass
+    else:
+        if date_range == 1:
+            expenses_list = get_expenses_this_month()
+            clear()
+            print_expenses(expenses_list)
+            finish_viewing()
 
 
 def view_expenses_by_category():
     """This function displays expenses from a specified category in a
     specified date range."""
-    print("Logic here to select category and date and print expenses.")
+    print("Please choose a category.")
+    view_categories()
+    #number_of_categories =
+    get_menu_selection(5)
+    date_range = select_date_range()
+    if date_range == 0:
+        pass
+    else:
+        #get_expenses_in_date_range()
+        finish_viewing()
 
 
 def expenses_menu():
@@ -58,7 +79,6 @@ def expenses_menu():
             clear()
             print(expenses_sub_heading("View Expenses"))
             view_expenses()
-            finish_viewing()
 
         elif menu == 3:
             clear()

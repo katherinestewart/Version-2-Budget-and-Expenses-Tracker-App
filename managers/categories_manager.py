@@ -4,25 +4,6 @@
 from managers.table_manager import TableManager as tm
 from user.input import get_menu_selection
 
-'''
-class CategoriesManager:
-    """This class manages expenses in the expenses table."""
-    def __init__(self, **kwargs):
-        self.id_ = kwargs["list"]
-        self.description = kwargs["description"]
-        self.budget = kwargs["budget"]
-
-    def __str__(self):
-        """Constructs a string in a readable format."""
-        return self.description
-
-    def get_budget_info(self):
-        """Returns all attributes for viewing an expense."""
-        description = self.description
-        amount = self.budget.amount
-        term = self.budget.term
-        return (description, amount, term)'''
-
 
 class Category:
     """This class
