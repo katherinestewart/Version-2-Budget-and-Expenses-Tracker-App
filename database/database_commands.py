@@ -9,22 +9,54 @@ import sqlite3
 from database import populate_finances_db as pf
 
 
-CREATE_EXPENSES_TABLE = """CREATE TABLE IF NOT EXISTS expenses
-(id INTEGER PRIMARY KEY AUTOINCREMENT, date TEXT, description TEXT,
-amount FLOAT, categoryID INTEGER, FOREIGN KEY(categoryID)
-REFERENCES categories(id))"""
-CREATE_INCOME_TABLE = """CREATE TABLE IF NOT EXISTS income
-(id INTEGER PRIMARY KEY AUTOINCREMENT, date TEXT, sourceID INT,
-amount FLOAT, FOREIGN KEY(sourceID) REFERENCES income_sources(id))"""
-CREATE_CATEGORY_TABLE = """CREATE TABLE IF NOT EXISTS categories
-(id INTEGER PRIMARY KEY AUTOINCREMENT, description TEXT, budgetID TEXT,
-FOREIGN KEY(budgetID) REFERENCES budget(id))"""
-CREATE_BUDGET_TABLE = """CREATE TABLE IF NOT EXISTS budget
-(id INTEGER PRIMARY KEY AUTOINCREMENT, amount FLOAT, term TEXT)"""
-CREATE_GOALS_TABLE = """CREATE TABLE IF NOT EXISTS goals
-(id INTEGER PRIMARY KEY AUTOINCREMENT, description TEXT, amount FLOAT, term TEXT)"""
-CREATE_SOURCES_TABLE = """CREATE TABLE IF NOT EXISTS sources
-(id INTEGER PRIMARY KEY AUTOINCREMENT, description TEXT)"""
+CREATE_EXPENSES_TABLE = """
+CREATE TABLE IF NOT EXISTS expenses(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    date TEXT,
+    description TEXT,
+    amount REAL,
+    categoryID INTEGER,
+    FOREIGN KEY(categoryID) REFERENCES categories(id)
+)
+"""
+CREATE_INCOME_TABLE = """
+CREATE TABLE IF NOT EXISTS income(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    date TEXT,
+    sourceID INT,
+    amount REAL,
+    FOREIGN KEY(sourceID) REFERENCES income_sources(id)
+)
+"""
+CREATE_CATEGORY_TABLE = """
+CREATE TABLE IF NOT EXISTS categories(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    description TEXT,
+    budgetID TEXT,
+    FOREIGN KEY(budgetID) REFERENCES budget(id)
+)
+"""
+CREATE_BUDGET_TABLE = """
+CREATE TABLE IF NOT EXISTS budget(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    amount REAL,
+    term TEXT
+)
+"""
+CREATE_GOALS_TABLE = """
+CREATE TABLE IF NOT EXISTS goals(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    description TEXT,
+    amount REAL,
+    term TEXT
+)
+"""
+CREATE_SOURCES_TABLE = """
+CREATE TABLE IF NOT EXISTS sources(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    description TEXT
+)
+"""
 MAX_BUDGET_ID = """SELECT MAX(id) FROM budget"""
 INSERT_EXPENSE = """INSERT INTO expenses(date, description, amount, categoryID)
 VALUES(?,?,?,?)"""

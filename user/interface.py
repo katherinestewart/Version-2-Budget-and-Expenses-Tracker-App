@@ -96,3 +96,22 @@ def goals_sub_heading(title):
     :rtype: str
     """
     return f"{SUB_EMOJI}\033[34m{SUB_START}{title}\033[34m{SUB_END}"
+
+
+def money_format(some_amount):
+    """This function convert an amount of money into a string with £
+    sign and 2 decimal places.
+
+    :return: amount with £ and 2 dp
+    :rtype: str
+    """
+    if len(str(some_amount)) == 1:
+        some_amount = str(some_amount) + ".00"
+    if str(some_amount)[-1] == ".":
+        some_amount = str(some_amount) + "00"
+    if len(str(some_amount)) > 1:
+        if str(some_amount)[-2] == ".":
+            some_amount = str(some_amount) + "0"
+
+    some_amount = "£" + str(some_amount)
+    return some_amount
