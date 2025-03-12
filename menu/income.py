@@ -6,10 +6,8 @@ each selection.
 """
 
 from menu.sub_menu.sources import sources_menu
-from user_interface.user_input import (get_menu_selection, request_complete,
-                                       finish_viewing)
-from user_interface.display import (clear, income_menu_heading,
-                                    income_sub_heading)
+from user.input import get_menu_selection, request_complete, finish_viewing
+from user.interface import clear, income_menu_heading, income_sub_heading
 
 INCOME_MENU = f"""{income_menu_heading("INCOME")}
 \nPlease choose from the following options:

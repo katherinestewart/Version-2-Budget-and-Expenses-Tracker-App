@@ -2,7 +2,6 @@
 effect the user interface."""
 
 import os
-from time import sleep
 
 START = "\033[1m -------- \033[0m\033[1m"
 END = "\033[1m --------\033[0m"

@@ -4,8 +4,8 @@ income, budget, financial goals or to exit the programme.
 
 from time import sleep
 from database import database_commands as dc
-from user_interface.display import clear
-from user_interface.user_input import get_menu_selection
+from user.interface import clear
+from user.input import get_menu_selection
 from menu.expenses import expenses_menu
 from menu.income import income_menu
 from menu.budget import budget_menu

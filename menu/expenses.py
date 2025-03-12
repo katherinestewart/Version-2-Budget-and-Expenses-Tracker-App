@@ -5,10 +5,10 @@ functions to get the required returns for each selection.
 """
 
 from menu.sub_menu.categories import categories_menu
-from user_interface.user_input import (get_menu_selection, request_complete,
-                                       finish_viewing)
-from user_interface.display import (expenses_menu_heading,
-                                    expenses_sub_heading, clear)
+from managers.expenses_manager import Expense, get_expense
+from user.input import get_menu_selection, request_complete, finish_viewing
+from user.interface import (expenses_menu_heading, expenses_sub_heading,
+                            clear)
 
 EXPENSES_MENU = f"""{expenses_menu_heading("EXPENSES")}
 \nPlease choose from the following options:
@@ -21,7 +21,7 @@ EXPENSES_MENU = f"""{expenses_menu_heading("EXPENSES")}
 
 def add_expense():
     """This function adds an expense to the database."""
-    print("Print expense that has been added")
+    get_expense().insert_expense()
 
 
 def view_expenses():
