@@ -1,11 +1,19 @@
 """This module"""
 
-from database.database_commands import fetch_all
+from database.database_commands import fetch_all, insert_data
 from user.input import get_menu_selection
 
 GET_CATEGORIES = """SELECT id, category FROM category"""
 COUNT = """SELECT count(*) FROM category"""
-INSERT_CATEGORY = """INSERT INTO category(category) VALUES(?)"""
+INSERT_CATEGORY = """
+    INSERT INTO category(category)
+    VALUES(?)
+"""
+UPDATE_CATEGORY = """
+    UPDATE category
+    SET category = ?
+    WHERE id = ?
+"""
 
 
 class CategoryManager:
@@ -36,6 +44,14 @@ class CategoryManager:
         self.print_categories()
         self.id_ = get_menu_selection(len(category_dict))
         return category_dict[self.id_]
+
+    def update_category(self, update):
+        """This"""
+        insert_data(UPDATE_CATEGORY, (update, self.id_))
+
+    def insert_category(self):
+        """This"""
+        insert_data(INSERT_CATEGORY, (self.category,))
 
     def print_categories(self):
         """This function prints a list of categories.
