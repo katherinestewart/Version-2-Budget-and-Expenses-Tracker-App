@@ -27,7 +27,7 @@ def add_category():
     print("Print category that has been added")
 
 
-def categories_menu():
+def category_menu():
     """This function presents the user with options to manage expense
     categories and calls relevant functions according to user selection
 

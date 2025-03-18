@@ -9,29 +9,20 @@ import sqlite3
 from database import populate_finances_db as pf
 
 
-CREATE_EXPENSES_TABLE = """
-CREATE TABLE IF NOT EXISTS expenses(
+CREATE_EXPENSE_TABLE = """
+CREATE TABLE IF NOT EXISTS expense(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     date TEXT,
-    description TEXT,
+    expense TEXT,
     amount REAL,
     categoryID INTEGER,
-    FOREIGN KEY(categoryID) REFERENCES categories(id)
-)
-"""
-CREATE_INCOME_TABLE = """
-CREATE TABLE IF NOT EXISTS income(
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    date TEXT,
-    sourceID INT,
-    amount REAL,
-    FOREIGN KEY(sourceID) REFERENCES income_sources(id)
+    FOREIGN KEY(categoryID) REFERENCES category(id)
 )
 """
 CREATE_CATEGORY_TABLE = """
-CREATE TABLE IF NOT EXISTS categories(
+CREATE TABLE IF NOT EXISTS category(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    description TEXT,
+    category TEXT,
     budgetID TEXT,
     FOREIGN KEY(budgetID) REFERENCES budget(id)
 )
@@ -43,30 +34,33 @@ CREATE TABLE IF NOT EXISTS budget(
     term TEXT
 )
 """
+CREATE_INCOME_TABLE = """
+CREATE TABLE IF NOT EXISTS income(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    date TEXT,
+    sourceID INT,
+    amount REAL,
+    FOREIGN KEY(sourceID) REFERENCES source(id)
+)
+"""
+CREATE_SOURCE_TABLE = """
+CREATE TABLE IF NOT EXISTS source(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    source TEXT
+)
+"""
 CREATE_GOALS_TABLE = """
 CREATE TABLE IF NOT EXISTS goals(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    description TEXT,
+    goal TEXT,
     amount REAL,
     term TEXT
 )
 """
-CREATE_SOURCES_TABLE = """
-CREATE TABLE IF NOT EXISTS sources(
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    description TEXT
-)
-"""
 MAX_BUDGET_ID = """SELECT MAX(id) FROM budget"""
-INSERT_EXPENSE = """INSERT INTO expenses(date, description, amount, categoryID)
-VALUES(?,?,?,?)"""
-INSERT_INCOME = """INSERT INTO income(date, sourceID, amount) VALUES(?,?,?)"""
-INSERT_CATEGORY = """INSERT INTO categories(description) VALUES(?)"""
 INSERT_BUDGET = """INSERT INTO budget(amount, term) VALUES(?,?)"""
-INSERT_GOAL = """INSERT INTO goals(description, amount, term) VALUES(?,?,?)"""
-INSERT_SOURCE = """INSERT INTO sources(description) VALUES(?)"""
-UPDATE_CATEGORY = """UPDATE categories SET budgetID = ? WHERE id = ?"""
-SELECT_FIRST_EXPENSE = """SELECT * FROM expenses WHERE id = 1"""
+UPDATE_CATEGORY = """UPDATE category SET budgetID = ? WHERE id = ?"""
+SELECT_FIRST_EXPENSE = """SELECT * FROM expense WHERE id = 1"""
 
 
 
@@ -185,10 +179,10 @@ def create_tables():
     :return: None
     """
     commands = [
-        CREATE_EXPENSES_TABLE,
+        CREATE_EXPENSE_TABLE,
         CREATE_CATEGORY_TABLE,
         CREATE_INCOME_TABLE,
-        CREATE_SOURCES_TABLE,
+        CREATE_SOURCE_TABLE,
         CREATE_BUDGET_TABLE,
         CREATE_GOALS_TABLE,
     ]
