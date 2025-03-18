@@ -5,7 +5,7 @@ also contains all relevant functions to get the required returns for
 each selection.
 """
 
-from menu.sub_menu.sources import sources_menu
+from menu.sub_menu.source import source_menu
 from user.input import get_menu_selection, request_complete, finish_viewing
 from user.interface import clear, income_menu_heading, income_sub_heading
 
@@ -67,7 +67,7 @@ def income_menu():
 
         elif menu == 4:
             clear()
-            sources_menu()
+            source_menu()
 
         # Return to main menu
         else:

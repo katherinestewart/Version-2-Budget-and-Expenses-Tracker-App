@@ -34,7 +34,7 @@ def add_source():
     request_complete("Source", "added")
 
 
-def sources_menu():
+def source_menu():
     """This function manages user selection for income sources and
     calls relevant functions according to this selection
 

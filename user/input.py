@@ -1,6 +1,8 @@
 """This module contains logic to validate user input."""
 
 from time import sleep
+from maths.dates import (get_first_of_month, get_one_year_ago,
+                         get_six_months_ago, get_three_months_ago)
 
 ENTER = "\nEnter your selection: "
 INVALID_INPUT = "You entered an invalid input. Please try again."
@@ -129,3 +131,20 @@ def select_date_range():
     print(SELECT_DATE_RANGE)
     date_range = get_menu_selection(5)
     return date_range
+
+
+def get_start_date(date_range):
+    """This function.
+    """
+    start = None
+
+    if date_range == 1:
+        start = get_first_of_month()
+    if date_range == 2:
+        start = get_three_months_ago()
+    if date_range == 3:
+        start = get_six_months_ago()
+    if date_range == 4:
+        start = get_one_year_ago()
+
+    return start

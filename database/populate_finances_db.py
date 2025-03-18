@@ -1,7 +1,22 @@
 """This module adds dummy data to the tables in the database for
 testing purposes."""
 
-from database import database_commands as dc
+import sqlite3
+from contextlib import contextmanager
+
+INSERT_EXPENSE = """
+INSERT INTO expense(date, expense, amount, categoryID)
+VALUES(?,?,?,?)
+"""
+INSERT_CATEGORY = """INSERT INTO category(category) VALUES(?)"""
+INSERT_INCOME = """INSERT INTO income(date, sourceID, amount) VALUES(?,?,?)"""
+INSERT_BUDGET = """INSERT INTO budget(amount, term) VALUES(?,?)"""
+INSERT_GOAL = """INSERT INTO goals(goal, amount, term) VALUES(?,?,?)"""
+INSERT_SOURCE = """INSERT INTO source(source) VALUES(?)"""
+MAX_BUDGET_ID = """SELECT MAX(id) FROM budget"""
+INSERT_BUDGET = """INSERT INTO budget(amount, term) VALUES(?,?)"""
+UPDATE_CATEGORY = """UPDATE category SET budgetID = ? WHERE id = ?"""
+SELECT_FIRST_EXPENSE = """SELECT * FROM expense WHERE id = 1"""
 
 expenses = [
     ("2024-01-01", "Home Insurance", 180.55, 3),
@@ -416,15 +431,86 @@ def populate_tables():
     :return: None
     """
     commands = [
-        (dc.INSERT_EXPENSE, expenses),
-        (dc.INSERT_CATEGORY, categories),
-        (dc.INSERT_INCOME, incomes),
-        (dc.INSERT_SOURCE, sources),
-        (dc.INSERT_GOAL, goals),
+        (INSERT_EXPENSE, expenses),
+        (INSERT_CATEGORY, categories),
+        (INSERT_INCOME, incomes),
+        (INSERT_SOURCE, sources),
+        (INSERT_GOAL, goals),
     ]
 
     for _, command in enumerate(commands):
-        dc.insert_many(command)
+        insert_many(command)
 
     for index, budget in enumerate(budgets):
-        dc.insert_budget(budget_category_ids[index], budget)
+        insert_budget(budget_category_ids[index], budget)
+
+
+@contextmanager
+def get_cursor(commit_changes=False):
+    """This function catches any errors when connecting to the database
+    and creates a cursor.
+
+    :param commit_changes: If changes should be committed (default = False)
+    :return: cursor
+    :rtype: cursor
+    """
+    try:
+        db = sqlite3.connect("finances.db")
+        cursor = db.cursor()
+        yield cursor
+    except sqlite3.Error as e:
+        db.rollback()
+        raise e
+    else:
+        if commit_changes:
+            db.commit()
+    finally:
+        db.close()
+
+
+def insert_many(command):
+    """This function inserts a list of data into the database.
+
+    :param command: tuple containing (str, list)
+    :return: None
+    """
+    with get_cursor(True) as cursor:
+        cursor.executemany(*command)
+
+
+def insert_data(string, args):
+    """This function inserts data into the database.
+
+    :param string: SQLite command
+    :param args: tuple with arguments for command
+    :return: None
+    """
+    with get_cursor(True) as cursor:
+        cursor.execute(string, args)
+
+
+def fetch_one(command):
+    """This function fetches data from one row in the database.
+
+    :param input: SQLite command
+    :param args: arguments for SQLite command
+    :return: data from one row
+    :rtype: tuple
+    """
+    with get_cursor() as cursor:
+        cursor.execute(command)
+        data = cursor.fetchone()
+
+    return data
+
+
+def insert_budget(category_id, budget):
+    """This function enters a new budget assigned to a category.
+
+    :param category_id: primary key in categories table
+    :param budget: tuple containing (amount, term)
+    :return: None
+    """
+    insert_data(INSERT_BUDGET, budget)
+    budget_id = fetch_one(MAX_BUDGET_ID)
+    insert_data(UPDATE_CATEGORY, (*budget_id, category_id))

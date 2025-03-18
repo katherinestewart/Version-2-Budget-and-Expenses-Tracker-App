@@ -6,7 +6,7 @@ from time import sleep
 from database import database_commands as dc
 from user.interface import clear
 from user.input import get_menu_selection
-from menu.expenses import expenses_menu
+from menu.expense import expenses_menu
 from menu.income import income_menu
 from menu.budget import budget_menu
 from menu.goals import goals_menu
