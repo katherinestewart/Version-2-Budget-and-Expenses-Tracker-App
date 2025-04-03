@@ -7,13 +7,23 @@ each selection.
 
 from datetime import date
 from menu.sub_menu.source import source_menu
-from user.input import (get_menu_selection, request_complete, finish_viewing,
-                        select_date_range, get_start_date)
+from user.input import (
+    get_menu_selection,
+    request_complete,
+    finish_viewing,
+    select_date_range,
+    get_start_date,
+)
 from user.interface import clear, income_menu_heading, income_sub_heading
-from managers.income_manager import (IncomeManager as IM, print_incomes,
-                                     fetch_all_rows, fetch_rows_by_date,
-                                     fetch_rows_by_date_src,
-                                     fetch_rows_by_src, get_objects_from_rows)
+from managers.income_manager import (
+    IncomeManager as IM,
+    print_incomes,
+    fetch_all_rows,
+    fetch_rows_by_date,
+    fetch_rows_by_date_src,
+    fetch_rows_by_src,
+    get_objects_from_rows,
+)
 from managers.source_manager import SourceManager as SM
 
 INCOME_MENU = f"""{income_menu_heading("INCOME")}
@@ -35,8 +45,7 @@ def add_income():
 
 
 def view_income():
-    """This function displays income in a specified date range.
-    """
+    """This function displays income in a specified date range."""
     start = None
     income_list = []
     date_range = select_date_range()

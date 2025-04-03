@@ -5,15 +5,24 @@ functions to get the required returns for each selection.
 """
 
 from datetime import date
-from user.input import (get_menu_selection, request_complete, finish_viewing,
-                        select_date_range, get_start_date)
-from user.interface import (expenses_menu_heading, expenses_sub_heading,
-                            clear)
+from user.input import (
+    get_menu_selection,
+    request_complete,
+    finish_viewing,
+    select_date_range,
+    get_start_date,
+)
+from user.interface import expenses_menu_heading, expenses_sub_heading, clear
 from menu.sub_menu.category import category_menu
-from managers.expense_manager import (ExpenseManager as EM, print_expenses,
-                                      get_objects_from_rows, fetch_all_rows,
-                                      fetch_rows_by_date, fetch_rows_by_date_cat,
-                                      fetch_rows_by_cat)
+from managers.expense_manager import (
+    ExpenseManager as EM,
+    print_expenses,
+    get_objects_from_rows,
+    fetch_all_rows,
+    fetch_rows_by_date,
+    fetch_rows_by_date_cat,
+    fetch_rows_by_cat,
+)
 from managers.category_manager import CategoryManager as CM
 
 EXPENSES_MENU = f"""{expenses_menu_heading("EXPENSES")}
@@ -35,8 +44,7 @@ def add_expense():
 
 
 def view_expenses():
-    """This function displays expenses in a specified date range.
-    """
+    """This function displays expenses in a specified date range."""
     start = None
     expenses_list = []
     date_range = select_date_range()

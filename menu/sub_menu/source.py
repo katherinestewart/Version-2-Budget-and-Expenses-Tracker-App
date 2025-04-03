@@ -1,8 +1,12 @@
 """This module"""
 
 from user.interface import clear, income_sub_heading
-from user.input import (get_menu_selection, finish_viewing, request_complete,
-                        get_description)
+from user.input import (
+    get_menu_selection,
+    finish_viewing,
+    request_complete,
+    get_description,
+)
 from managers.source_manager import SourceManager as SM
 
 SOURCES_MENU = f"""{income_sub_heading("Sources")}
@@ -15,8 +19,7 @@ SOURCES_MENU = f"""{income_sub_heading("Sources")}
 
 
 def view_sources():
-    """This function prints income sources to user.
-    """
+    """This function prints income sources to user."""
     SM().print_sources()
 
 
