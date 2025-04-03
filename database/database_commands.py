@@ -63,8 +63,6 @@ UPDATE_CATEGORY = """UPDATE category SET budgetID = ? WHERE id = ?"""
 SELECT_FIRST_EXPENSE = """SELECT * FROM expense WHERE id = 1"""
 
 
-
-
 @contextmanager
 def get_cursor(commit_changes=False):
     """This function catches any errors when connecting to the database
