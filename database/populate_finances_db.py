@@ -415,12 +415,7 @@ goals = [
     ("net income", 40560, "annual"),
     ("gross income", 50000, "annual"),
 ]
-budgets = [
-    (500, "monthly"),
-    (200, "monthly"),
-    (1000, "monthly"),
-    (200, "weekly")
-]
+budgets = [(500, "monthly"), (200, "monthly"), (1000, "monthly"), (200, "weekly")]
 budget_category_ids = [2, 4, 5, 7]
 sources = [("Salary",), ("Freelance",), ("Teaching",), ("Refund",)]
 
