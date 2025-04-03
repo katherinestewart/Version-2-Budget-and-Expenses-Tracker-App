@@ -1,7 +1,9 @@
 """This module"""
 
 from user.interface import clear, income_sub_heading
-from user.input import get_menu_selection, finish_viewing, request_complete
+from user.input import (get_menu_selection, finish_viewing, request_complete,
+                        get_description)
+from managers.source_manager import SourceManager as SM
 
 SOURCES_MENU = f"""{income_sub_heading("Sources")}
 \nPlease choose from the following options:
@@ -15,23 +17,20 @@ SOURCES_MENU = f"""{income_sub_heading("Sources")}
 def view_sources():
     """This function prints income sources to user.
     """
-    print(income_sub_heading("View Income Sources"))
-    print("Logic here to print sources.")
-    finish_viewing()
+    SM().print_sources()
 
 
 def edit_source():
     """This function"""
-    print(income_sub_heading("Edit Income Sources"))
-    print("Logic here to edit income sources.")
-    request_complete("Income source", "updated")
+    source = SM().select_source()
+    update = get_description("source")
+    source.update_source(update)
 
 
 def add_source():
     """This function adds a income source to the database."""
-    print(income_sub_heading("Add Source"))
-    print("Print source that has been added")
-    request_complete("Source", "added")
+    source = get_description("source")
+    SM(so=source).insert_source()
 
 
 def source_menu():
@@ -48,17 +47,27 @@ def source_menu():
         # View sources of income
         if menu == 1:
             clear()
+            print(income_sub_heading("View Income Sources"))
             view_sources()
+            finish_viewing()
 
         # Edit income source
         elif menu == 2:
             clear()
+            print(income_sub_heading("Edit Income Sources"))
             edit_source()
+            clear()
+            view_sources()
+            request_complete("Income source", "updated")
 
         # Add new income source
         elif menu == 3:
             clear()
+            print(income_sub_heading("Add Source"))
             add_source()
+            clear()
+            view_sources()
+            request_complete("Source", "added")
 
         # Return to income menu
         else:

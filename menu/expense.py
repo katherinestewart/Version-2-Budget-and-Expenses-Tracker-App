@@ -55,12 +55,12 @@ def view_expenses():
 
         clear()
         print_expenses(expenses_list)
+        finish_viewing()
 
 
 def view_expenses_by_category():
     """This function displays expenses from a specified category in a
     specified date range."""
-    print("Please choose a category.")
     category = CM().select_category()
     date_range = select_date_range()
 
@@ -76,6 +76,7 @@ def view_expenses_by_category():
 
         clear()
         print_expenses(expenses_list)
+        finish_viewing()
 
 
 def expenses_menu():
@@ -100,13 +101,11 @@ def expenses_menu():
             clear()
             print(expenses_sub_heading("View Expenses"))
             view_expenses()
-            finish_viewing()
 
         elif menu == 3:
             clear()
             print(expenses_sub_heading("View Expenses by Category"))
             view_expenses_by_category()
-            finish_viewing()
 
         elif menu == 4:
             category_menu()

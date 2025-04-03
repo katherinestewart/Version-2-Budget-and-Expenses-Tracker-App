@@ -1,7 +1,7 @@
 """This module"""
 
 from database.database_commands import fetch_all, insert_data
-from user.input import get_menu_selection
+from user.input import INVALID_INPUT, get_menu_selection
 
 GET_CATEGORIES = """SELECT id, category FROM category"""
 COUNT = """SELECT count(*) FROM category"""
@@ -42,8 +42,11 @@ class CategoryManager:
         """This"""
         category_dict = self.get_categories()
         self.print_categories()
-        self.id_ = get_menu_selection(len(category_dict))
-        return category_dict[self.id_]
+        while True:
+            self.id_ = get_menu_selection(len(category_dict))
+            while self.id_ != 0:
+                return category_dict[self.id_]
+            print(INVALID_INPUT)
 
     def update_category(self, update):
         """This"""
@@ -62,7 +65,7 @@ class CategoryManager:
         print("\n\U0001f9fe \033[1mCategories: \033[0m\n")
 
         for (i, category_obj) in category_dict.items():
-            if i+1 < 10:
+            if i < 10:
                 print(f"{i}.  {category_obj.category}")
             else:
                 print(f"{i}. {category_obj.category}")

@@ -109,8 +109,6 @@ def get_description(thing):
         if description_check(description):
             return description
 
-        print(INVALID_INPUT)
-
 
 def description_check(description):
     """Checks validity of user input
