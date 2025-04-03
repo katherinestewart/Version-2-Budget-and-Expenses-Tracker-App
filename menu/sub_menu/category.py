@@ -1,8 +1,12 @@
 """This module contains the categories menu."""
 
 from user.interface import expenses_sub_heading, clear
-from user.input import (get_menu_selection, finish_viewing, request_complete,
-                        get_description)
+from user.input import (
+    get_menu_selection,
+    finish_viewing,
+    request_complete,
+    get_description,
+)
 from managers.category_manager import CategoryManager as CM
 
 CATEGORIES_MENU = f"""{expenses_sub_heading("Manage Categories")}
